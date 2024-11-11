@@ -14,36 +14,114 @@
     <link rel="stylesheet" href="style.css">
     <link href="cookies/cookiesconsent.theme-dark.css" rel="stylesheet">
     <link href="cookies/cookiesconsent.css" rel="stylesheet">
+
+      
 </head>
 <body>
-
+  <style>
+    /* Countdown container with fixed position and centered */
+    .countdown {
+      position: fixed;        /* Fixed position relative to the viewport */
+      top: 50%;               /* Center vertically */
+      left: 50%;              /* Center horizontally */
+      transform: translate(-50%, -50%); /* Offset by half its size to perfectly center */
+      display: flex;          /* Flexbox to keep the sections inline */
+      padding: 20px;          /* Padding inside the countdown container */
+      border-radius: 10px;    /* Optional rounded corners */
+    }
+  
+    /* Countdown section styling */
+    .countdown-section {
+      padding: 10px;          /* Padding inside each section */
+      border-radius: 5px;     /* Optional rounded corners for the sections */
+      margin-right: 10px;     /* Space between the sections */
+    }
+  
+    /* Remove margin from the last countdown section */
+    .countdown-section:last-child {
+      margin-right: 0;
+    }
+      </style>
     <div class="background">
-        <div class="countdown">
-            <p>There are only</p>
-            <h1 id="timer">00 days 00 hrs 00 mins 00 secs</h1>
-            <p>until Christmas!</p>
-        </div>
+        <div id="countdown" style="margin-inline: 1;">
+                <!-- Sections for days, hours, minutes, seconds, and milliseconds -->
+    <div class="countdown-section">
+      <div id="days" class="countdown-numbers"></div>
+      <div class="label">Days</div>
+    </div>
+    <div class="countdown-section">
+      <div id="hours" class="countdown-numbers"></div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="countdown-section">
+      <div id="minutes" class="countdown-numbers"></div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="countdown-section">
+      <div id="seconds" class="countdown-numbers"></div>
+      <div class="label">Seconds</div>
+    </div>
+    <div class="countdown-section">
+      <div id="milliseconds" class="countdown-numbers"></div>
+      <div class="label">Milliseconds</div>
+    </div>
+          </div>
         <div class="social-icons">
             <a href="#" onclick="shareOn('facebook')"><img src="images/facebook-icon.png" alt="Facebook"></a>
             <a href="#" onclick="shareOn('twitter')"><img src="images/twitter-icon.png" alt="Twitter"></a>
             <a href="#" onclick="shareOn('pinterest')"><img src="images/pinterest-icon.png" alt="Pinterest"></a>
         </div>
     </div>
+    <script>
+        const countdownDate = new Date("2024-12-24T23:59:59").getTime();
+        let previousValues = { days: '', hours: '', minutes: '', seconds: '', milliseconds: '' };
+    
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = countdownDate - now;
+    
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          const milliseconds = Math.floor((distance % 1000) / 10); // Displaying only 2 digits
+    
+          // Helper function to convert number to images if the number has changed
+          function numberToImages(number, elementId) {
+            const strNumber = String(number).padStart(elementId === "milliseconds" ? 2 : 2, "0");
+            if (previousValues[elementId] !== strNumber) {
+              previousValues[elementId] = strNumber;
+              const element = document.getElementById(elementId);
+              element.innerHTML = ""; // Clear only if value has changed
+    
+              strNumber.split("").forEach(digit => {
+                const img = document.createElement("img");
+                img.src = `images/${digit}.png`;
+                img.alt = digit;
+                img.className = "digit";
+                element.appendChild(img);
+              });
+            }
+          }
+    
+          // Update each countdown section only if the value has changed
+          numberToImages(days, "days");
+          numberToImages(hours, "hours");
+          numberToImages(minutes, "minutes");
+          numberToImages(seconds, "seconds");
+          numberToImages(milliseconds, "milliseconds");
+    
+          // Stop countdown when the date is reached
+          if (distance <= 0) {
+            clearInterval(interval);
+            document.getElementById("countdown").innerHTML = "Countdown Ended";
+          }
+        }
+    
+        // Set interval to 100 milliseconds to avoid excessive updates
+        const interval = setInterval(updateCountdown, 37);
+      </script>
     <script src="script.js"></script>
-    <script src="cookies/cookiesconsent.js"></script>
-    <script> const cc = CookiesConsentJS({
-    expirationDays: 365,
-    buttons: ["reject", "accept", "dismiss"],
-    content: {
-        title: "This website is using Cookies!",
-        message: "<p>By accepting the message you will accept the cookies.</p>",
-        policy: "Privacy Policy",
-        policyLink: "https://gdpr-info.eu/",
-        btnAccept: "Accept all cookies",
-        btnReject: "Reject all cookies",
-        btnDismiss: "Show cookies"
-    }
-    }); 
 </script>
 </body>
 </html>
