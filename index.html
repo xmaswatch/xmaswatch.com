@@ -19,31 +19,40 @@
 </head>
 <body>
   <style>
-    /* Countdown container with fixed position and centered */
-    .countdown {
-      position: fixed;        /* Fixed position relative to the viewport */
-      top: 50%;               /* Center vertically */
-      left: 50%;              /* Center horizontally */
-      transform: translate(-50%, -50%); /* Offset by half its size to perfectly center */
-      display: flex;          /* Flexbox to keep the sections inline */
-      padding: 20px;          /* Padding inside the countdown container */
-      border-radius: 10px;    /* Optional rounded corners */
-    }
-  
-    /* Countdown section styling */
-    .countdown-section {
-      padding: 10px;          /* Padding inside each section */
-      border-radius: 5px;     /* Optional rounded corners for the sections */
-      margin-right: 10px;     /* Space between the sections */
-    }
-  
-    /* Remove margin from the last countdown section */
-    .countdown-section:last-child {
-      margin-right: 0;
-    }
+    /* Main countdown container */
+#countdown {
+    position: fixed;              /* Fixed position relative to the viewport */
+    top: 50%;                     /* Center vertically */
+    left: 50%;                    /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center alignment with offset */
+    display: flex;                /* Use flexbox for horizontal layout */
+    justify-content: center;      /* Center align the sections horizontally */
+    align-items: center;          /* Center align the sections vertically */
+    gap: 20px;                    /* Space between the sections */
+    padding: 20px;                /* Padding around the countdown */
+    border-radius: 10px;          /* Rounded corners for styling */
+}
+
+/* Countdown sections */
+.countdown-section {
+    display: flex;                /* Flexbox for column layout */
+    flex-direction: column;       /* Stack numbers and labels vertically */
+    align-items: center;          /* Center align content horizontally */
+    text-align: center;           /* Align text to center */
+    padding: 20px;                /* Padding for each section */
+    border-radius: 5px;           /* Rounded corners */
+    inline-size: max-content;
+}
+
+/* Numbers in the countdown */
+.countdown-numbers {
+    font-size: 2rem;              /* Adjust font size for visibility */
+    font-weight: bold;            /* Make numbers bold */
+}
+
       </style>
     <div class="background">
-        <div id="countdown" style="margin-inline: 1;">
+        <div id="countdown">
                 <!-- Sections for days, hours, minutes, seconds, and milliseconds -->
     <div class="countdown-section">
       <div id="days" class="countdown-numbers"></div>
@@ -61,10 +70,6 @@
       <div id="seconds" class="countdown-numbers"></div>
       <div class="label">Seconds</div>
     </div>
-    <div class="countdown-section">
-      <div id="milliseconds" class="countdown-numbers"></div>
-      <div class="label">Milliseconds</div>
-    </div>
           </div>
         <div class="social-icons">
             <a href="#" onclick="shareOn('facebook')"><img src="images/facebook-icon.png" alt="Facebook"></a>
@@ -74,7 +79,7 @@
     </div>
     <script>
         const countdownDate = new Date("2024-12-24T23:59:59").getTime();
-        let previousValues = { days: '', hours: '', minutes: '', seconds: '', milliseconds: '' };
+        let previousValues = { days: '', hours: '', minutes: '', seconds: ''};
     
         function updateCountdown() {
           const now = new Date().getTime();
@@ -84,7 +89,6 @@
           const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
           const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          const milliseconds = Math.floor((distance % 1000) / 10); // Displaying only 2 digits
     
           // Helper function to convert number to images if the number has changed
           function numberToImages(number, elementId) {
@@ -109,17 +113,17 @@
           numberToImages(hours, "hours");
           numberToImages(minutes, "minutes");
           numberToImages(seconds, "seconds");
-          numberToImages(milliseconds, "milliseconds");
     
           // Stop countdown when the date is reached
           if (distance <= 0) {
             clearInterval(interval);
-            document.getElementById("countdown").innerHTML = "Countdown Ended";
+            document.getElementById("countdown").innerHTML = "Merry Christmas!!";
           }
         }
     
         // Set interval to 100 milliseconds to avoid excessive updates
-        const interval = setInterval(updateCountdown, 37);
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
       </script>
     <script src="script.js"></script>
 </script>
