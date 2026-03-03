@@ -1,0 +1,295 @@
+/* Philippines Countdown Styling */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #004d40; /* Tropical teal */
+    color: white;
+    text-align: center;
+    overflow: hidden; 
+}
+
+.background {
+    background-image: url('https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&q=80&w=1920');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1;
+}
+
+.background * {
+    position: relative;
+    z-index: 2;
+}
+
+.countdown {
+    width: 100%;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#timer {
+    font-size: 4em; 
+    font-weight: 900;
+    color: #ffd700; /* Gold color */
+    text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+    margin: 10px 0;
+}
+
+#trip-label {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+#trip-status {
+    font-size: 1.8em;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+#next-destination {
+    font-size: 1.1em;
+    font-weight: 700;
+    opacity: 1;
+    margin-bottom: 15px;
+}
+
+/* Itinerary Styling */
+.itinerary-container {
+    width: 90%;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.itinerary-container h3 {
+    font-size: 1.4em;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 8px;
+    margin: 0 0 15px 0;
+}
+
+#itinerary-list {
+    list-style: none;
+    padding: 0;
+}
+
+#itinerary-list li {
+    padding: 6px 0; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1em; 
+    transition: all 0.3s ease;
+}
+
+#itinerary-list li.completed {
+    text-decoration: line-through;
+    opacity: 0.4;
+    filter: grayscale(1);
+}
+
+#itinerary-list li.current {
+    font-weight: bold;
+    color: #fff;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 5px;
+    padding: 6px 10px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+#itinerary-list li span {
+    font-weight: bold;
+    color: #ffd700;
+    margin-right: 12px;
+}
+
+.social-icons img {
+    width: 70px;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(193, 53, 132, 0.9));
+}
+/* Announcements Button */
+.announcements-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff6347;
+    color: white;
+    border: 2px solid #fff;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 0.8em;
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.announcements-btn:hover {
+    transform: scale(1.1);
+    background: #d9534f;
+}
+
+#announcement-count {
+    background: #fff;
+    color: #ff6347;
+    border-radius: 50%;
+    padding: 2px 7px;
+    margin-left: 5px;
+    font-size: 0.9em;
+}
+
+.announcements-list {
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    margin-top: 15px;
+}
+
+.announcement-item {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+.announcement-time {
+    display: block;
+    font-size: 0.7em;
+    opacity: 0.6;
+    margin-top: 5px;
+}
+
+/* Modal Styling */
+.modal {
+...
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    background-color: #004d40;
+    margin: 15% auto;
+    padding: 25px;
+    border: 2px solid #ffd700;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    color: white;
+}
+
+.modal-content input, .modal-content textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.modal-content textarea {
+    height: 100px;
+    resize: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.modal-buttons button {
+    padding: 10px 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#post-btn { background: #ffd700; color: #000; }
+#cancel-btn { background: #666; color: #fff; }
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body, html {
+        overflow-y: auto; /* Allow scrolling on mobile */
+    }
+
+    .background {
+        height: auto;
+        min-height: 100vh;
+        padding: 40px 0; /* Add space for scrolling */
+    }
+
+    #timer {
+        font-size: 2.5em; /* Smaller timer for mobile */
+    }
+
+    #trip-status {
+        font-size: 1.4em;
+    }
+
+    #trip-label {
+        font-size: 1.1em;
+    }
+
+    .itinerary-container {
+        width: 95%;
+        padding: 10px 15px;
+    }
+
+    .social-icons img {
+        width: 50px; /* Smaller icons */
+    }
+
+    .announcements-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.7em;
+    }
+}
+

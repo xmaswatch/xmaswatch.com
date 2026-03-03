@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Xmas Watch" />
+    <title>The Big Adventure 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="../cookies/cookiesconsent.theme-dark.css" rel="stylesheet">
+    <link href="../cookies/cookiesconsent.css" rel="stylesheet">
+    <script type="text/javascript" src="../snow_effect/snowstorm.js"></script>
+    <script>
+        const travelEmojis = ['🥥', '🌴', '🍹', '🏄', '🍣', '🗼', '🥙', '🕌'];
+        Object.defineProperty(snowStorm, 'snowCharacter', {
+            get: function() {
+                return travelEmojis[Math.floor(Math.random() * travelEmojis.length)];
+            }
+        });
+        
+        snowStorm.flakesMax = 40;
+        snowStorm.flakesMaxActive = 20;
+        snowStorm.vMaxX = 1;
+        snowStorm.vMaxY = 1.5;
+        snowStorm.flakeWidth = 40;
+        snowStorm.flakeHeight = 40;
+    </script>
+</head>
+<body>
+    <div class="background">
+        <!-- Announcements Button (Floating) -->
+        <button id="announcements-btn" class="announcements-btn" onclick="toggleAnnouncements()" style="display: none;">
+            ANNOUNCEMENTS <span id="announcement-count">0</span>
+        </button>
+
+        <div class="countdown">
+            <p id="trip-label">Countdown to the Adventure</p>
+            <h1 id="timer">00d 00h 00m 00s</h1>
+            <p id="trip-status">Loading the plan...</p>
+            <p id="next-destination" style="font-size: 1.2em; opacity: 0.8;"></p>
+        </div>
+
+        <div class="itinerary-container">
+            <h3 id="itinerary-title" onclick="handleTitleClick()">Our Journey</h3>
+            <ul id="itinerary-list">
+                <!-- Will be populated by JS -->
+            </ul>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.instagram.com/filipinoauneuro/" target="_blank">
+                <img src="images/instagram-icon.png" alt="Instagram">
+            </a>
+        </div>
+    </div>
+
+    <!-- Announcements Panel -->
+    <div id="announcements-panel" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 style="border-bottom: 2px solid #ff6347; padding-bottom: 10px; text-align: center;">Latest Updates 📢</h3>
+            <div id="announcements-list" class="announcements-list">
+                <!-- Messages go here -->
+            </div>
+            <div class="modal-buttons" style="justify-content: center; margin-top: 20px;">
+                <button id="cancel-btn" onclick="toggleAnnouncements()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Admin Modal -->
+    <div id="admin-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Post an Announcement</h3>
+            <input type="password" id="admin-password" placeholder="Password...">
+            <textarea id="admin-message" placeholder="What's the update? (Expires in 12h)"></textarea>
+            <div class="modal-buttons">
+                <button id="cancel-btn" onclick="closeAdmin()">Cancel</button>
+                <button id="clear-btn" onclick="clearAnnouncements()" style="background: #666; color: #fff;">Clear All</button>
+                <button id="post-btn" onclick="postAnnouncement()">Post</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../cookies/cookiesconsent.js"></script>
+    <script> const cc = CookiesConsentJS({
+    expirationDays: 365,
+    buttons: ["reject", "accept", "dismiss"],
+    content: {
+        title: "This website is using Cookies!",
+        message: "<p>By accepting the message you will accept the cookies.</p>",
+        policy: "Privacy Policy",
+        policyLink: "https://gdpr-info.eu/",
+        btnAccept: "Accept all cookies",
+        btnReject: "Reject all cookies",
+        btnDismiss: "Show cookies"
+    }
+    }); 
+</script>
+</body>
+</html>
